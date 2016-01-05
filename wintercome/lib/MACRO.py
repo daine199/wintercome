@@ -24,3 +24,6 @@ VIEWER = 1
 CMDLOGFILETIME = '%Y%m%d_%H_.log'
 APPLOGFILETIME = '%Y%m%d_.log'
 APPLOGTIME = '%Y%m%d_%H%M%S'
+
+# Error Type
+RUNLEVELTOOLOW = "用户运行级别不够. \n"

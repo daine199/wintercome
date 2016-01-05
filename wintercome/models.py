@@ -1,11 +1,11 @@
 from django.db import models
 
 # Create your models here.
-import base64, time, os, subprocess, shlex
-from wintercome.lib.logging import (trace_app_log, appLogging,
+import base64, time, subprocess, shlex
+from .lib.logging import (trace_app_log, appLogging,
                                     cmdLogging, loggingtime,
-                                    strToBytes)
-from wintercome.lib import MACRO
+                                    strToBytes, cmdErrorLogging)
+from .lib import MACRO, common
 
 
 # Owner Daine.H
@@ -16,22 +16,31 @@ class cmdTask(models.Model):
     title = models.CharField(max_length=32)
     ownerid = models.IntegerField(default=1)
     cmd = models.CharField(max_length=500)
+    description = models.TextField(blank=True)
     runlevel =  models.IntegerField(blank=True)# groupLevel id
     def __str__(self):
         return self.title
+    @trace_app_log
     def taskAllocate(self,userid = 1):
-        # 1.需要比对owner是否是执行的用户
-        pass
+        if self.ownerid == userid:
+            return self.baseCall()
+        else:
+            if winterUser.objects.get(id = userid).runLevel >= self.runlevel:
+                return self.baseCall()
+            else:
+                cmdErrorLogging(MACRO.RUNLEVELTOOLOW)
+
     @trace_app_log
     def baseCall(self):
         # 运行命令行,记录运行结果到log文件,返回状态码
-        logprint = "Run cmd {0} at {1} . \n".format(self.title,loggingtime())
+        logprint = "\nRun cmd {0} at {1} . \n".format(self.title,loggingtime())
         cmdLogging(strToBytes(logprint))
         res = subprocess.Popen(shlex.split(self.cmd),
                                stdout = subprocess.PIPE)
-        cmdLogging(res.stdout.read())
+        resprint = res.stdout.read()
+        cmdLogging(resprint)
         cmdLogging(strToBytes('Return {0}\n'.format(res.poll())))
-        return res.poll()
+        return {'returncode':res.poll(), 'returnprint':common.bytesToStr(resprint).split("\n")}
 
     @trace_app_log
     def quickcall(self):
@@ -46,9 +55,9 @@ class runLevel(models.Model):
 
 
 class winterUser(models.Model):
-    userid = models.CharField(max_length=32)
+    userid = models.CharField(max_length=32, db_index=True)
     passwd = models.CharField(max_length=32)
-    runLevel = models.IntegerField(blank=True)
+    runLevel = models.IntegerField(blank=True, db_index=True)
     def setPasswd(self, ori_pwd):
         pwd_byte = bytes(ori_pwd,encoding = 'utf-8')
         self.passwd = base64.encodebytes(pwd_byte)
