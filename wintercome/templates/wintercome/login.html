@@ -1,0 +1,32 @@
+{% extends "wintercome/base.html" %}
+
+{% block title %}
+Task Dashboard
+{% endblock %}
+
+{% block content %}
+<h1>CMD Run Results</h1>
+
+<div id="sign-up">
+{% if form %}
+<h2>User Sign</h2>
+    <form action="{% url 'wintercome:login-page' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit" value="Login" />
+    </form>
+{% endif%}
+
+{% else %}
+<h2>User Singed</h2>
+    <div>
+        <ul>
+            <li>Hello {{userid}}</li>
+            {% if user_list %}
+            <li><a href="{% url 'wintercome:user-list %}">USERLIST</a></li>
+            {% endif%}
+        </ul>
+    </div>
+</div>
+{% endblock %}

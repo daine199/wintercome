@@ -3,7 +3,14 @@
 # logging 装饰器
 
 from wintercome.lib import MACRO, common
-import time, os
+import time
+import os
+
+def init_log_path():
+    if not os.path.exists(MACRO.APPLOGPATH):
+        pass
+
+
 
 def trace_app_log(func):
     """
@@ -18,14 +25,14 @@ def trace_app_log(func):
             logfile = time.strftime(MACRO.APPLOGFILETIME,
                                 time.localtime(time.time()))
             with open(os.path.join(MACRO.APPLOGPATH,
-                               logfile), 'a') as log:
+                                   logfile), 'a') as log:
                 logtime = time.strftime(MACRO.APPLOGTIME,
-                                time.localtime(time.time()))
+                                        time.localtime(time.time()))
                 print(logtime, ":Start {0}:({1},{2})..".format(func.__name__,
                                                                args, kwargs))
                 log.write("\n\n{0}: Start {1}:({2},{3})..\n".format(logtime,
-                                                              func.__name__,
-                                                              args, kwargs))
+                                                                    func.__name__,
+                                                                    args, kwargs))
             return func(*args, **kwargs)
         return logging
     else:
@@ -33,21 +40,23 @@ def trace_app_log(func):
             return func(*args, **kwargs)
         return logging
 
-def appLogging(raw_input):
+
+def app_logging(raw_input):
     if MACRO.LOGGINGSWITCH == 1:
         logfile = time.strftime(MACRO.APPLOGFILETIME,
                                 time.localtime(time.time()))
         with open(os.path.join(MACRO.APPLOGPATH,
                                logfile), 'a') as log:
-            #log.write('\n')
             log.write(raw_input)
     else:
         pass
 
-def strToBytes(raw_input):
-    return bytes(raw_input,encoding='utf-8')
 
-def cmdLogging(raw_input):
+def str_to_bytes(raw_input):
+    return bytes(raw_input, encoding='utf-8')
+
+
+def cmd_logging(raw_input):
     if MACRO.LOGGINGSWITCH == 1:
         logfile = time.strftime(MACRO.CMDLOGFILETIME,
                                 time.localtime(time.time()))
@@ -57,19 +66,22 @@ def cmdLogging(raw_input):
             log.write(raw_input)
     else:
         pass
-def cmdErrorLogging(errortype = MACRO.RUNLEVELTOOLOW):
+
+
+def cmd_error_logging(error_type=MACRO.RUNLEVELTOOLOW):
     if MACRO.LOGGINGSWITCH == 1:
         logfile = time.strftime(MACRO.CMDLOGFILETIME,
                                 time.localtime(time.time()))
         with open(os.path.join(MACRO.CMDLOGPATH,
                                logfile), 'a') as log:
-            print(errortype)
-            log.write(errortype)
+            print(error_type)
+            log.write(error_type)
     else:
         pass
 
-def loggingtime(timeformat = MACRO.APPLOGTIME):
-    retime = time.strftime(timeformat,time.localtime(time.time()))
+
+def logging_time(time_format=MACRO.APPLOGTIME):
+    retime = time.strftime(time_format, time.localtime(time.time()))
     return retime
 
 

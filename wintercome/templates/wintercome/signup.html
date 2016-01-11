@@ -1,0 +1,20 @@
+{% extends "wintercome/base.html" %}
+
+{% block title %}
+Task Dashboard
+{% endblock %}
+
+{% block content %}
+<h1>CMD Run Results</h1>
+
+<div id="sign-up">
+<h2>User Sign</h2>
+<form action="{% url 'wintercome:sign-page' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+
+    <input type="submit" value="Sign" />
+</form>
+
+</div>
+{% endblock %}

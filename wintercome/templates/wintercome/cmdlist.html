@@ -5,8 +5,9 @@ Task Dashboard
 {% endblock %}
 
 {% block content %}
-<h1>Avaliable CMD task:</h1>
+<div><h1>Available CMD task:</h1></div>
 
+<div>
 <table>
 <tr>
     <th>ID</th>
@@ -14,16 +15,17 @@ Task Dashboard
     <th>Description</th>
     <th>Run Level</th>
 </tr>
-{% for cmdtask in cmdtasklist %}
+{% for cmd_task in cmd_task_list %}
 <tr>
-    <td><a href="{% url 'wintercome:basic-cmd-call' cmdtask.id %}">
-        {{cmdtask.id}}
+    <td><a href="{% url 'wintercome:basic-cmd-call' cmd_task.id %}">
+        {{cmd_task.id}}
     </a> </td>
-    <td>{{cmdtask.title}}</td>
-    <td>{{cmdtask.description</td>
-    <td>{{cmdtask.runlevel}}</td>
+    <td>{{cmd_task.title}}</td>
+    <td>{{cmd_task.description}}</td>
+    <td>{{cmd_task.run_level}}</td>
 </tr>
 {% endfor %}
 </table>
+</div>
 
 {% endblock %}
