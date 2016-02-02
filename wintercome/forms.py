@@ -10,6 +10,7 @@ class SignUpForm(forms.Form):
     passwd2 = forms.CharField(label='Retype Password', widget=forms.PasswordInput())
 
 
+
 class LoginInForm(forms.Form):
     userid = forms.CharField(label='User ID', max_length=32)
     passwd = forms.CharField(label='Password', widget=forms.PasswordInput())

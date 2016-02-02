@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 
@@ -68,3 +69,22 @@ def user_list_page(request):
     else:
         pass
 
+
+def index_page(request):
+    context = {}
+    if not request.user.is_authenticated():
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        print(username, password, user)
+        if user is not None:
+            login(request, user)
+        else:
+            print("login failed.")
+        # print(username, password)
+    return render(request, 'wintercome/index.html')
+
+
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect('/wintercome/index/')
