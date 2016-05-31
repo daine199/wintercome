@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from wiki.urls import get_pattern as get_wiki_pattern
+from django_nyt.urls import get_pattern as get_nyt_pattern
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^wintercome/', include('wintercome.urls', namespace='wintercome'))
+]
 
+urlpatterns += [
+    url(r'^wiki/notifications/', get_nyt_pattern()),
+    url(r'^wiki/', get_wiki_pattern())
 ]
