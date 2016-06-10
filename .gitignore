@@ -90,7 +90,7 @@ ENV/
 # Rope project settings
 .ropeproject
 
-.gitignore
+
 .idea/encodings.xml
 .idea/misc.xml
 .idea/modules.xml
@@ -104,3 +104,11 @@ wintercome/__pycache__/urls.cpython-34.pyc
 wintercome/__pycache__/views.cpython-34.pyc
 wintercome/lib/__pycache__/
 wintercome/migrations/__pycache__/
+home/__init__.py
+home/admin.py
+home/apps.py
+home/images/
+home/migrations/
+home/models.py
+home/tests.py
+wintercome/migrations/0001_initial.py
