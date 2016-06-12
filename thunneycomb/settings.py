@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'wintercome',
+    'wintercome',
     'home',
     'django.contrib.sites', # django 1.6.2+
     'django.contrib.humanize',
@@ -145,5 +145,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     # "/var/www/thunneycomb/static",
-    ("wiki", os.path.join(BASE_DIR, "static/wiki/"))
+    ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
+    ("home", os.path.join(BASE_DIR, "static/home/"))
 ]
