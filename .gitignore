@@ -112,3 +112,5 @@ home/migrations/
 home/models.py
 home/tests.py
 wintercome/migrations/0001_initial.py
+settings.py
+static/
