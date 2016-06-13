@@ -2,6 +2,7 @@
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
+__pycache__/*
 *.py[cod]
 *$py.class
 *.pyc
@@ -97,5 +98,13 @@ ENV/
 .idea/wintercome.iml
 .idea/workspace.xml
 db.sqlite3
-*.pyc
 migrations/*
+home/__init__.py
+home/admin.py
+home/apps.py
+home/images/
+home/migrations/
+home/models.py
+home/tests.py
+settings.py
+static/

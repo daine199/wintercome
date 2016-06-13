@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+{% load staticfiles %}
 <head>
     <meta charset="utf-8" />
     <title>霹雳蜂巢 - Thuneycomb</title>
@@ -9,7 +10,7 @@
 </head>
 <style type="text/css">
     body{
-        background: #2f3238 url(http://baystate-viewbook-2011.s3.amazonaws.com/images/bg_texture.png) no-repeat center;
+        background: #2f3238 url({% static "home/img/bg_texture.png" %}) no-repeat center;
         font-family: "Fjalla One", sans-serif;
         color: #ffffff;
     }
