@@ -23,10 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kv%nxx(07o53+&__xvse93+v_!*(o4kcds$#ifyg0_*7omak_c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEBUG = False
+TEMPLATE_DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -138,8 +137,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # MEDIA_ROOT = "/var/www/thunneycomb/media"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = "/var/www/thunneycomb/media/"
+STATIC_ROOT = "/var/www/thunneycomb/static/"
+
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
