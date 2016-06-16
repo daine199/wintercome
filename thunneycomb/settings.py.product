@@ -24,7 +24,9 @@ SECRET_KEY = 'kv%nxx(07o53+&__xvse93+v_!*(o4kcds$#ifyg0_*7omak_c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-TEMPLATE_DEBUG = False
+if DEBUG is False:
+    TEMPLATE_DEBUG = False
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -36,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'wintercome',
+    'wintercome',
     'home',
     'django.contrib.sites', # django 1.6.2+
     'django.contrib.humanize',
@@ -137,13 +139,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # MEDIA_ROOT = "/var/www/thunneycomb/media"
-MEDIA_ROOT = "/var/www/thunneycomb/media/"
-STATIC_ROOT = "/var/www/thunneycomb/static/"
+if DEBUG is False:
+    MEDIA_ROOT = "/var/www/thunneycomb/media/"
+    STATIC_ROOT = "/var/www/thunneycomb/static/"
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     # "/var/www/thunneycomb/static",
-    ("wiki", os.path.join(BASE_DIR, "static/wiki/"))
+    ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
+    ("home", os.path.join(BASE_DIR, "static/home/"))
 ]

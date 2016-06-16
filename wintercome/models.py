@@ -17,9 +17,11 @@ class cmdTask(models.Model):
     ownerid = models.IntegerField(default=1)
     cmd = models.CharField(max_length=500)
     description = models.TextField(blank=True)
-    runlevel =  models.IntegerField(blank=True)# groupLevel id
+    runlevel = models.IntegerField(blank=True)# groupLevel id
+
     def __str__(self):
         return self.title
+
     @trace_app_log
     def taskAllocate(self,userid = 1):
         if self.ownerid == userid:
