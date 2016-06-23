@@ -12,7 +12,7 @@ def index(request):
     if request.method == 'GET':
         return render(request, 'home/index.html')
     if request.method == 'POST':
-        app_name = request.POST.get('app_name')
+        app_name = request.POST.get('app_name').lower()
         if app_name in access_entry:
             return redirect("/" + app_name)
         if app_name in settings.INSTALLED_APPS:
