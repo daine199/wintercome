@@ -17,6 +17,11 @@ def index(request):
             return redirect("/" + app_name)
         if app_name in settings.INSTALLED_APPS:
             return redirect("/" + app_name)
+        if app_name == "admin":
+            if request.user.is_authenticated():
+                return redirect("/" + app_name)
+            else:
+                return render(request, 'home/index.html')
         else:
             context = {"error": "Invalid App"}
             return render(request, 'home/index.html', context)
