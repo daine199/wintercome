@@ -110,3 +110,5 @@ home/models.py
 home/tests.py
 settings.py
 static/
+wintercome/__pycache__/__init__.cpython-34.pyc
+thunneycomb/__pycache__/__init__.cpython-34.pyc
