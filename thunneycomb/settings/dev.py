@@ -24,9 +24,10 @@ SECRET_KEY = 'kv%nxx(07o53+&__xvse93+v_!*(o4kcds$#ifyg0_*7omak_c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG is False:
+    TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -94,7 +95,15 @@ SITE_ID = 1
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+
 if DEBUG is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -105,14 +114,6 @@ if DEBUG is True:
             'PORT': '5432',
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -150,12 +151,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # MEDIA_ROOT = "/var/www/thunneycomb/media"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+if DEBUG is False:
+    MEDIA_ROOT = "/var/www/thunneycomb/media/"
+    STATIC_ROOT = "/var/www/thunneycomb/static/"
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     # "/var/www/thunneycomb/static",
-    ("wiki", os.path.join(BASE_DIR, "static/wiki/"))
+    ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
+    ("home", os.path.join(BASE_DIR, "static/home/"))
 ]
