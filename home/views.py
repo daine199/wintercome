@@ -9,19 +9,28 @@ from django.contrib.auth import logout
 
 def index(request):
     access_entry = ("login", "logout")
+    ext_entry = ("requests", "django")
     if request.method == 'GET':
         return render(request, 'home/index.html')
     if request.method == 'POST':
         app_name = request.POST.get('app_name').lower()
+
         if app_name in access_entry:
             return redirect("/" + app_name)
-        if app_name in settings.INSTALLED_APPS:
+
+        elif app_name in ext_entry:
+            if app_name == "requests":
+                return redirect("http://www.python-requests.org/en/master/")
+
+        elif app_name in settings.INSTALLED_APPS:
             return redirect("/" + app_name)
-        if app_name == "admin":
+
+        elif app_name == "admin":
             if request.user.is_authenticated():
                 return redirect("/" + app_name)
             else:
                 return render(request, 'home/index.html')
+
         else:
             context = {"error": "Invalid App"}
             return render(request, 'home/index.html', context)
@@ -39,4 +48,5 @@ def logout_processor(request):
     if request.user.is_authenticated():
         logout(request)
         return redirect("/")
+
 

@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'wiki.plugins.macros',
 ]
 
+if DEBUG:  # DEBUG APP
+    INSTALLED_APPS.append('summerhere')
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
